@@ -1,0 +1,1281 @@
+/* =========================================
+   1. VARIABLES & RESET
+   ========================================= */
+:root {
+    /* Mode Clair */
+    --bg-main: #DCDCDC;       
+    --bg-contrast: #000000;   
+    --text-main: #000000;
+    --text-light: #FFFFFF;
+    --text-sub: #7C7C7C;
+    --accent: #53C1DE;        
+    --box-grey: #C4C4C4;      
+    --footer-bg: #1A1A1A;
+    --error: #ff4d4d;
+    --success: #28a745;
+    
+    --transition-speed: 0.4s;
+    --font-main: 'Montserrat', sans-serif;
+}
+
+/* Mode Sombre */
+body.dark-mode {
+    --bg-main: #121212;       
+    --bg-contrast: #000000;   
+    --text-main: #FFFFFF;     
+    --text-sub: #A0A0A0;
+    --box-grey: #2C2C2C;      
+    --bg-light-accent: #1F1F1F;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    overflow-x: hidden;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.wrapper {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* =========================================
+   2. ANIMATIONS (Keyframes)
+   ========================================= */
+@keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-100px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(100px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes pulse-border {
+    0% { box-shadow: 0 0 0 0 rgba(83, 193, 222, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(83, 193, 222, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(83, 193, 222, 0); }
+}
+
+/* =========================================
+   3. HEADER & NAVBAR
+   ========================================= */
+
+
+/* --- CUSTOM CURSOR --- */
+.cursor, .cursor2 {
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none; /* Important ! */
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    transition: width 0.3s, height 0.3s, opacity 0.3s;
+}
+
+/* Le point central */
+.cursor {
+    width: 8px;
+    height: 8px;
+    background-color: red;
+}
+
+/* Le cercle autour (qui traîne un peu) */
+.cursor2 {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--text-main);
+    transition: all 0.1s ease-out; /* Mouvement fluide */
+}
+
+/* Cache le curseur par défaut sur PC */
+body { cursor: none; }
+
+/* Réactive le curseur normal sur Mobile (car pas de souris) */
+@media (max-width: 900px) {
+    .cursor, .cursor2 { display: none; }
+    body { cursor: auto; }
+}
+
+/* Effet au survol des liens (Hover) */
+body.hover-active .cursor2 {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(83, 193, 222, 0.2); /* Un peu de bleu transparent */
+    border-color: transparent;
+}
+
+/* --- BACK TO TOP --- */
+#backToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: var(--accent);
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    font-size: 1.2rem;
+    z-index: 99;
+    opacity: 0; /* Caché par défaut */
+    pointer-events: none;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+#backToTop.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+#backToTop:hover {
+    transform: translateY(-5px);
+    background: #FFF;
+}
+
+
+/* --- PROGRESS BAR --- */
+#progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    z-index: 10000;
+    background: transparent;
+}
+
+#progress-bar {
+    height: 100%;
+    background: var(--accent); /* Ton bleu cyan */
+    width: 0%;
+    transition: width 0.1s;
+}
+
+.split-navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    background: transparent;
+}
+
+.logo-split {
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: var(--text-main);
+    transition: color 0.4s;
+}
+
+.nav-split {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    margin-right: 5%;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #FFF; /* Blanc sur le fond noir */
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--accent);
+    transition: width 0.3s;
+}
+
+.nav-links a:hover::after { width: 100%; }
+
+.hamburger { display: none; }
+
+/* =========================================
+   4. SECTION HERO (Intro)
+   ========================================= */
+.hero-split {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--bg-main); 
+    transition: background-color 0.4s;
+}
+
+.hero-left {
+    width: 45%; 
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    color: var(--text-main); 
+}
+
+.left-content {
+    text-align: center;
+    max-width: 80%;
+    
+}
+
+.brand-icon {
+    font-size: 3rem;
+    margin-bottom: 2rem;
+    color: var(--text-main);
+    transition: color 0.4s;
+}
+
+.hero-split h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+    text-transform: uppercase;
+    transition: color 0.4s;
+}
+.highlight-name { font-weight: 900; }
+
+.subtitle-split {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 2rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-top: 1px dotted #999;
+    border-bottom: 1px dotted #999;
+    padding: 10px 0;
+    display: inline-block;
+    width: 100%;
+}
+
+.hero-right {
+    width: 65%; 
+    background-color: #000;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-wrapper {
+    width: 60%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10%;
+    animation: slideInRight 1s ease-out forwards;
+    animation-delay: 0.3s; 
+    opacity: 0; 
+   
+}
+
+.hero-portrait {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+    animation: float 6s ease-in-out infinite;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* =========================================
+   5. BOUTONS & ELEMENTS
+   ========================================= */
+/* Bouton Contact Navbar */
+.btn-contact-split {
+    background: #FFF;
+    color: #000;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: transform 0.3s;
+}
+.btn-contact-split:hover { 
+    transform: scale(1.05); 
+    animation: pulse-border 1.5s infinite;
+}
+
+/* Bouton CV */
+.cv-container-split { margin-bottom: 2rem; }
+.btn-cv-split {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    border: 2px solid var(--text-main);
+    color: var(--text-main);
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: 0.3s;
+}
+.btn-cv-split:hover {
+    background: var(--text-main);
+    color: var(--bg-main);
+}
+
+/* Réseaux Sociaux */
+.socials-split {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 2rem;
+}
+.socials-split a {
+    width: 45px;
+    height: 45px;
+    background: #D1D1D1;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    border-radius: 4px;
+    transition: 0.3s;
+    text-decoration: none;
+}
+.socials-split a:hover {
+    background: #000;
+    color: #FFF;
+    transform: translateY(-3px);
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    cursor: pointer;
+    color: #FFF;
+    font-size: 1.2rem;
+    border: 2px solid rgba(255,255,255,0.2);
+    padding: 8px;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+.theme-toggle:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: var(--accent);
+}
+
+/* Boutons Filtres Portfolio */
+.filter-btn {
+    background: transparent;
+    border: 2px solid #333;
+    color: #888;
+    padding: 0.6rem 1.5rem;
+    cursor: pointer;
+    font-family: var(--font-main);
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+.filter-btn:hover, .filter-btn.active {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* Bouton Submit Formulaire */
+button[type="submit"] {
+    background: var(--bg-contrast);
+    color: var(--text-light);
+    padding: 1rem 2rem;
+    border: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+}
+body.dark-mode button[type="submit"] { background: var(--accent); color: #000; }
+
+/* =========================================
+   6. SECTIONS GENERALES
+   ========================================= */
+section {
+    padding: 5rem 5%;
+    position: relative;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    font-weight: 800;
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+}
+.section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 60px;
+    height: 4px;
+    background: var(--accent);
+}
+
+.reveal {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out;
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
+   7. TIMELINE (Parcours)
+   ========================================= */
+.timeline {
+    border-left: 3px solid var(--accent);
+    margin-left: 10px;
+    padding-left: 30px;
+    position: relative;
+    max-width: 800px;
+}
+.timeline-item {
+    margin-bottom: 3rem;
+    position: relative;
+}
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -39px; 
+    top: 5px;
+    width: 16px;
+    height: 16px;
+    background: var(--bg-main);
+    border: 3px solid var(--accent);
+    border-radius: 50%;
+    transition: 0.3s;
+}
+.timeline-item:hover::before { background: var(--accent); }
+.timeline-date {
+    display: inline-block;
+    background: var(--accent);
+    color: #000;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+}
+
+/* =========================================
+   8. COMPETENCES (Skills)
+   ========================================= */
+
+   /* --- SAVOIR-ÊTRE (SOFT SKILLS) --- */
+
+.soft-skills-container {
+    margin-top: 4rem;       /* Espace avec les logos du dessus */
+    text-align: center;
+    border-top: 1px solid rgba(124, 124, 124, 0.2); /* Petite ligne de séparation */
+    padding-top: 2rem;
+}
+
+.soft-skills-title {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--text-sub); /* Gris discret */
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+.soft-tags-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;        /* Permet de passer à la ligne si écran petit */
+    gap: 1rem;              /* Espace entre les étiquettes */
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.soft-tag {
+    padding: 0.8rem 1.5rem;
+    border: 1px solid var(--accent); /* Bordure Cyan */
+    border-radius: 50px;             /* Forme arrondie "pilule" */
+    font-weight: 600;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    transition: 0.3s ease;
+    cursor: default;                 /* Curseur normal car non cliquable */
+    background: transparent;
+}
+
+/* Effet au survol */
+.soft-tag:hover {
+    background: var(--accent);       /* Le fond se remplit en bleu */
+    color: #000;                     /* Le texte devient noir */
+    transform: translateY(-3px);     /* Remonte légèrement */
+    box-shadow: 0 5px 15px rgba(83, 193, 222, 0.3); /* Ombre lumineuse */
+}
+
+.skills-grid {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.skill-item {
+    text-align: center;
+    transition: transform 0.3s;
+    width: 100px;
+    opacity: 0;
+    transform: translateY(20px);
+}
+.reveal.active .skill-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+/* Cascade delays */
+.reveal.active .skill-item:nth-child(1) { transition-delay: 0.1s; }
+.reveal.active .skill-item:nth-child(2) { transition-delay: 0.2s; }
+.reveal.active .skill-item:nth-child(3) { transition-delay: 0.3s; }
+.reveal.active .skill-item:nth-child(4) { transition-delay: 0.4s; }
+.reveal.active .skill-item:nth-child(5) { transition-delay: 0.5s; }
+
+.skill-item:hover { transform: translateY(-5px) scale(1.1); }
+.skill-icon {
+    font-size: 4rem;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+}
+.skill-name { margin-top: 10px; font-weight: 600; font-size: 0.9rem; }
+.html-color { color: #E34F26; }
+.css-color { color: #1572B6; }
+.js-color { color: #F7DF1E; }
+.ue-color { fill: #000000; width: 60px; }
+body.dark-mode .ue-color { fill: #FFFFFF; }
+
+/* =========================================
+   9. PORTFOLIO
+   ========================================= */
+#portfolio {
+    background: var(--bg-contrast);
+    color: var(--text-light);
+    clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+}
+.filter-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+.project-card {
+    background: #1A1A1A;
+    border: 1px solid #333;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    display: block; 
+    text-decoration: none; 
+    color: inherit;  
+    overflow: hidden;      
+}
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.project-card h3 { color: var(--text-light); }
+body:not(.dark-mode) .project-card h3 { color: #FFF; }
+.project-card.hidden { display: none; }
+.project-card.show { animation: fadeIn 0.5s ease forwards; }
+
+.project-img {
+    width: 100%;
+    height: 250px;
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: #555;
+    position: relative;
+    overflow: hidden;
+}
+.project-img::after {
+    content: 'VOIR LE PROJET';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(83, 193, 222, 0.9);
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+    font-weight: 700;
+    color: #000;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.project-card:hover .project-img { transform: scale(1.1); transition: transform 0.5s ease; }
+.project-card:hover .project-img i { transform: scale(0.9); transition: transform 0.5s ease; }
+.project-card:hover .project-info { background-color: var(--bg-contrast); }
+.project-card:hover .project-img::after { opacity: 1; }
+.project-info { padding: 1.5rem; }
+.project-tags span {
+    display: inline-block;
+    background: #000;
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    margin-right: 5px;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    margin-bottom: 5px;
+}
+
+/* =========================================
+   10. CONTACT FORM (Version Clean & Pro)
+   ========================================= */
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr; /* La partie formulaire un peu plus large */
+    gap: 4rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.03); /* Légère carte de fond */
+    padding: 3rem;
+    border-radius: 20px;
+    /* Optionnel : petite ombre pour le relief */
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+/* --- COLONNE GAUCHE : INFOS --- */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 2rem;
+}
+
+.contact-intro {
+    margin-bottom: 3rem;
+    font-size: 1.2rem;
+    color: var(--text-sub);
+    line-height: 1.6;
+    max-width: 90%;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+/* Design des icônes (Cercles) */
+.info-item i {
+    width: 50px;              /* Largeur fixe */
+    height: 50px;             /* Hauteur fixe */
+    background: #FFF;         /* Fond blanc */
+    color: var(--accent);     /* Couleur de l'icône (bleu) */
+    display: flex;
+    justify-content: center;  /* Centre l'icône dans le cercle */
+    align-items: center;
+    border-radius: 50%;       /* Rend le carré rond */
+    font-size: 1.2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Légère ombre */
+    transition: transform 0.3s ease;
+    flex-shrink: 0;           /* Empêche l'icône de s'écraser si le texte est long */
+}
+
+.info-item:hover i {
+    background: var(--accent);
+    color: #FFF;
+    transform: scale(1.1);
+}
+
+/* --- COLONNE DROITE : FORMULAIRE --- */
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+/* Style des champs (Input & Textarea) */
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    padding: 1.2rem; /* Plus d'espace interne */
+    background-color: #FFF; /* Fond blanc pour le contraste */
+    border: 2px solid transparent; /* Bordure invisible par défaut */
+    border-radius: 12px; /* Angles arrondis modernes */
+    font-family: inherit;
+    color: var(--text-main);
+    font-size: 0.95rem;
+    transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03); /* Légère ombre */
+}
+
+/* Au focus (quand on clique dedans) */
+.form-group input:focus, 
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent); /* Bordure bleue */
+    box-shadow: 0 0 0 4px rgba(83, 193, 222, 0.1); /* Halo lumineux */
+    transform: translateY(-2px);
+}
+
+/* Le Bouton */
+button[type="submit"] {
+    width: 100%; /* Pleine largeur */
+    padding: 1.2rem;
+    background: var(--text-main); /* Noir (ou blanc en dark mode) */
+    color: var(--bg-main); /* Texte inverse */
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 1rem;
+}
+
+button[type="submit"]:hover {
+    background: var(--accent);
+    color: #FFF;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(83, 193, 222, 0.3);
+}
+
+/* --- GESTION DES ERREURS --- */
+.error-msg {
+    font-size: 0.8rem;
+    color: #ff4d4d;
+    margin-top: 8px;
+    margin-left: 10px;
+    display: none; /* Caché par défaut ! Important */
+    font-weight: 500;
+}
+
+/* JS ajoutera la classe .invalid quand il y a une erreur */
+.form-group input.invalid, 
+.form-group textarea.invalid {
+    border-color: #ff4d4d;
+    background-color: rgba(255, 77, 77, 0.05);
+}
+
+/* Affiche le message seulement si le champ est invalide */
+.form-group input.invalid ~ .error-msg,
+.form-group textarea.invalid ~ .error-msg {
+    display: block;
+    animation: fadeIn 0.3s;
+}
+
+/* Responsive Mobile */
+@media (max-width: 900px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+        gap: 3rem;
+    }
+    .contact-intro { text-align: center; }
+    /* On cache l'email complet sur mobile s'il est trop long, ou on réduit la police */
+    .info-item { font-size: 0.9rem; } 
+}
+
+/* =========================================
+   11. FOOTER
+   ========================================= */
+footer {
+    background: var(--footer-bg);
+    color: #FFF;
+    padding: 4rem 5% 2rem;
+    border-top: 1px solid #333;
+}
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+.visit-counter {
+    font-size: 0.8rem;
+    color: #555;
+    background: #000;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+
+/* --- CARROUSEL SWIPER --- */
+
+/* Ajustement de la section pour le slider */
+.swiper {
+    width: 100%;
+    padding-bottom: 50px; /* Place pour la pagination */
+    padding-top: 20px;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 350px; /* Largeur de base d'une carte */
+    height: auto;
+}
+
+/* Design de la Carte Projet */
+.carousel-card {
+    background: #1A1A1A; /* Fond sombre */
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    transition: 0.3s;
+    border: 1px solid #333;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Partie Image */
+.card-image {
+    width: 100%;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    background-color: #000; /* Fond noir si pas d'image */
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Remplit bien la case */
+    transition: 0.5s;
+}
+
+/* Overlay au survol de l'image */
+.card-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+.carousel-card:hover .card-overlay { opacity: 1; }
+.carousel-card:hover .card-image img { transform: scale(1.1); }
+
+/* Bouton Voir le code */
+.btn-code {
+    padding: 10px 20px;
+    border: 2px solid var(--accent);
+    color: #FFF;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 25px;
+    transition: 0.3s;
+}
+.btn-code:hover {
+    background: var(--accent);
+    color: #000;
+}
+
+/* Partie Texte */
+.card-content {
+    padding: 1.5rem;
+    flex-grow: 1; /* Pousse le contenu pour aligner les cartes */
+    display: flex;
+    flex-direction: column;
+}
+
+.card-content h3 {
+    color: #FFF;
+    margin-bottom: 0.5rem;
+    font-size: 1.4rem;
+}
+
+.card-desc {
+    color: #AAA;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+/* Tags (carrés bleus) */
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Customisation Swiper (Flèches et points) */
+.swiper-pagination-bullet-active { background-color: var(--accent) !important; }
+.swiper-button-next, .swiper-button-prev { color: var(--accent) !important; }
+
+/* =========================================
+   12. RESPONSIVE MOBILE
+   ========================================= */
+@media (max-width: 900px) {
+    /* Navbar Mobile */
+    .split-navbar {
+        position: fixed;
+        background: rgba(255,255,255,0.95);
+        padding: 1rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .nav-split { margin-right: 0; }
+    
+    .hamburger {
+        display: block;
+        color: #000;
+        font-size: 1.8rem;
+        cursor: pointer;
+        z-index: 102;
+    }
+    
+    .nav-links {
+        display: flex;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 70%;
+        background: #000;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s ease;
+        z-index: 100;
+    }
+    .nav-links.nav-active { right: 0; }
+    .btn-contact-split { display: none; }
+    
+    /* Hero Mobile */
+    .hero-split {
+        flex-direction: column;
+        height: auto;
+        overflow: visible;
+    }
+    .hero-left {
+        width: 100%;
+        height: auto;
+        padding: 6rem 0 4rem 0;
+    }
+    .hero-right {
+        width: 100%;
+        height: 50vh;
+        position: relative;
+        clip-path: polygon(0 10%, 100% 0, 100% 100%, 0% 100%);
+        margin-top: -50px;
+    }
+    .image-wrapper { margin-left: 0; width: 80%; }
+    
+    /* Sections Mobile */
+    .contact-container { grid-template-columns: 1fr; }
+    #portfolio { clip-path: none; padding-top: 4rem; }
+    .portfolio-grid { grid-template-columns: 1fr; }
+}
+
+
+
+/* --- MISE EN PAGE PARCOURS (GAUCHE / DROITE) --- */
+
+.resume-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Deux colonnes de taille égale */
+    gap: 4rem; /* Espace entre les deux colonnes */
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: start; /* Aligne le haut des colonnes */
+}
+
+/* Ajustement des titres dans les colonnes */
+.resume-column .section-title {
+    margin-bottom: 3rem;
+    font-size: 2rem; /* Un peu plus petit pour équilibrer */
+}
+
+/* --- RESPONSIVE (MOBILE) --- */
+@media (max-width: 900px) {
+    .resume-container {
+        grid-template-columns: 1fr; /* Une seule colonne sur mobile */
+        gap: 4rem; /* Espace vertical entre Études et Pro */
+    }
+}
+
+
+/* --- ANIMATION LOGO ROTATION (Toutes les 5s) --- */
+
+/* 1. Création de l'animation "Tourne et Attend" */
+@keyframes spin-pause {
+    0% { 
+        transform: rotateY(0deg); 
+    }
+    15% { 
+        transform: rotateY(360deg); /* Tourne complet en ~0.8s */
+    }
+    100% { 
+        transform: rotateY(360deg); /* Reste immobile pendant les 4.2s restantes */
+    }
+}
+
+/* 2. Application sur l'icône */
+.brand-icon i {
+    display: inline-block; /* Obligatoire pour animer une icône */
+    animation: spin-pause 5s infinite ease-in-out;
+    
+    /* Optionnel : Donne un petit effet 3D sympa */
+    transform-style: preserve-3d;
+    backface-visibility: visible;
+}
+
+/* Optionnel : Met en pause si on passe la souris dessus */
+.brand-icon:hover i {
+    animation-play-state: paused;
+    color: var(--accent); /* Change de couleur au survol */
+    transition: color 0.3s;
+}
+
+
+
+/* --- SCROLL DOWN ANIMATION --- */
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+
+/* La souris */
+.mouse {
+    width: 30px;
+    height: 50px;
+    border: 2px solid white; /* S'adapte au thème */
+    border-radius: 20px;
+    position: relative;
+    margin-bottom: 5px;
+}
+
+/* La molette qui bouge */
+.wheel {
+    width: 4px;
+    height: 8px;
+    background: white; /* Couleur Cyan */
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+    animation: scroll-wheel 1.5s infinite;
+}
+
+/* Les flèches en dessous */
+.arrow-scroll span {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-bottom: 2px solid white;
+    border-right: 2px solid white;
+    transform: rotate(45deg);
+    margin: -5px auto;
+    animation: scroll-arrow 1.5s infinite;
+}
+
+.arrow-scroll span:nth-child(2) { animation-delay: -0.2s; }
+.arrow-scroll span:nth-child(3) { animation-delay: -0.4s; }
+
+/* Animations Keyframes */
+@keyframes scroll-wheel {
+    0% { top: 5px; opacity: 1; }
+    100% { top: 25px; opacity: 0; }
+}
+
+@keyframes scroll-arrow {
+    0% { opacity: 0; transform: rotate(45deg) translate(-5px, -5px); }
+    50% { opacity: 1; }
+    100% { opacity: 0; transform: rotate(45deg) translate(5px, 5px); }
+}
+
+/* On cache l'indicateur sur mobile pour gagner de la place */
+@media (max-width: 900px) {
+    .scroll-indicator { display: none; }
+}
+
+
+
+
+/* --- LANGUES --- */
+.languages-container {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 2rem;
+}
+
+.lang-item {
+    background: var(--bg-contrast); /* Fond sombre/clair selon thème */
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+    border: 1px solid var(--accent);
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: 0.3s;
+}
+
+.lang-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(83, 193, 222, 0.2);
+}
+
+.lang-level {
+    color: var(--text-sub);
+    font-size: 0.9em;
+    margin-left: 10px;
+    font-style: italic;
+}
+
+
+/* --- BOUTON GITHUB PRO --- */
+.btn-github-pro {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 1rem 2rem;
+    background-color: #24292e; /* Couleur officielle GitHub */
+    color: #FFF;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: 0.3s;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-github-pro i {
+    font-size: 1.5rem;
+}
+
+.btn-github-pro:hover {
+    background-color: var(--accent); /* Devient bleu cyan au survol */
+    color: #000;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(83, 193, 222, 0.4);
+}
+
+
+/* --- NOTIFICATION SUCCÈS (Easter Egg) --- */
+.achievement-banner {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(150px); /* Caché en bas par défaut */
+    background: rgba(20, 20, 20, 0.95);
+    border: 2px solid #FFD700; /* Bordure Or */
+    padding: 15px 25px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.3); /* Lueur dorée */
+    z-index: 10000;
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Effet "rebond" */
+    pointer-events: none;
+}
+
+/* Classe ajoutée par JS pour faire monter la notif */
+.achievement-banner.visible {
+    transform: translateX(-50%) translateY(0);
+}
+
+.achievement-icon {
+    font-size: 2rem;
+}
+
+.achievement-text h3 {
+    color: #FFD700; /* Titre Or */
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.achievement-text p {
+    color: #FFF;
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+
+.carousel-card, .image-wrapper, .skill-item {
+    /* ... vos autres styles ... */
+    transform-style: preserve-3d; /* Aide pour la 3D */
+    overflow: hidden; /* Empêche le reflet de sortir du cadre */
+}
