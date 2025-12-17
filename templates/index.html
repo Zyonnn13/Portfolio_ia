@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clément Belmondo - Portfolio Expert</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <link rel="stylesheet" href="/static/js/main.js">
+
+    <link rel="icon" type="image/png" href="/static/asset/logo/fav_icon.png">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <meta property="og:title" content="Clément Belmondo - Portfolio Développeur">
+    <meta property="og:description"
+        content="Étudiant à Ynov, passionné par le Web et Unreal Engine 5. Découvrez mes projets.">
+    <meta property="og:image" content="https://votre-site.com/asset/images/moi.JPG">
+    <meta property="og:url" content="https://votre-site.com">
+    <meta name="theme-color" content="#53C1DE">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+    <div class="cursor"></div>
+    <div class="cursor2"></div>
+
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <div id="achievement-banner" class="achievement-banner">
+        <div class="achievement-icon">🏆</div>
+        <div class="achievement-text">
+            <h3>Mode Légendaire Activé !</h3>
+            <p>Bien joué, vous avez trouvé le secret.</p>
+        </div>
+    </div>
+
+    <a href="#" id="backToTop" title="Haut de page">
+        <i class="fa-solid fa-arrow-up"></i>
+    </a>
+
+    <div class="wrapper">
+
+
+        <header id="navbar" class="split-navbar">
+            <div class="logo-container">
+                <div class="logo-split">CB</div>
+            </div>
+
+            <nav class="nav-split">
+                <ul class="nav-links">
+                    <li><a href="#about">A Propos</a></li>
+                    <li><a href="#skills">Compétences</a></li>
+                    <li><a href="#portfolio">Portfolio</a></li>
+                </ul>
+
+                <div class="theme-toggle" id="themeToggle" title="Changer le thème">
+                    <i class="fa-solid fa-moon"></i>
+                </div>
+
+                <a href="#contact" class="btn-contact-split">CONTACTEZ-MOI</a>
+
+                <div class="hamburger">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </nav>
+        </header>
+
+        <main class="hero-split">
+            <div class="hero-left">
+                <div class="left-content">
+
+                    <div class="brand-icon" data-aos="fade-down" data-aos-delay="0">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </div>
+
+                    <h1 data-aos="fade-right" data-aos-delay="200">
+                        Clément<br>
+                        <span class="highlight-name">BELMONDO</span>
+                    </h1>
+
+                    <p class="subtitle-split" data-aos="fade-right" data-aos-delay="400">
+                        Je suis <span id="typed-text" style="color: var(--accent); font-weight:bold;"></span>
+                    </p>
+
+                    <div class="cv-container-split" data-aos="zoom-in" data-aos-delay="600">
+                        <a href="/static/asset/cv_clement_belmondo.pdf" class="btn-cv-split" download>
+                            <i class="fa-solid fa-download"></i> TÉLÉCHARGER MON CV
+                        </a>
+                    </div>
+
+                    <div class="socials-split" data-aos="fade-up" data-aos-delay="800">
+                        <a href="mailto:clement.belmondo13@ynov.com"><i class="fa-solid fa-at"></i></a>
+                        <a href="https://github.com/Zyonnn13"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/clément-belmondo-170b6a32a"><i
+                                class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="scroll-indicator">
+                <div class="mouse">
+                    <div class="wheel"></div>
+                </div>
+                <div class="arrow-scroll">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+
+
+            <div class="hero-right" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                <div class="image-wrapper" data-tilt data-tilt-glare data-tilt-max-glare="0.5">
+                    <img src="/static/asset/images/moi.JPG" alt="Clément Belmondo" class="hero-portrait">
+                </div>
+            </div>
+        </main>
+
+        <section id="about">
+            <div class="reveal">
+                <h2 class="section-title" data-aos="fade-up">À Propos</h2>
+                <p style="max-width: 600px; line-height: 1.6;">
+                    Passionné par le développement web mais aussi la création de jeux vidéo sur le moteur Unreal Engine
+                    5, j'essaie de développer mes compétences dans plusieurs domaines afin d'avoir une vision globale du
+                    monde de l'informatique. Actuellement en formation à Ynov Aix-en-Provence.
+                </p>
+
+                <div class="languages-container" data-aos="fade-up" data-aos-delay="200">
+                    <div class="lang-item">
+                        <span class="lang-name">🇫🇷 Français</span>
+                        <span class="lang-level">Natif</span>
+                    </div>
+                    <div class="lang-item">
+                        <span class="lang-name">🇬🇧 Anglais</span>
+                        <span class="lang-level">B2 (Technique)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="resume">
+            <div class="reveal">
+
+                <div class="resume-container">
+
+                    <div class="resume-column" data-aos="fade-right">
+                        <h2 class="section-title">Mon Parcours</h2>
+
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <span class="timeline-date">2025 - Présent</span>
+                                <div class="timeline-content">
+                                    <h3>Bachelor Informatique</h3>
+                                    <h4>Ynov Campus - Aix-en-Provence</h4>
+                                    <p>Etudiant Ynov Aix-en-Provence</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="timeline-date">2019 - 2023</span>
+                                <div class="timeline-content">
+                                    <h3>Baccalauréat Général</h3>
+                                    <h4>Lycée Châteaurenard Jean d'Ormesson</h4>
+                                    <p>Spécialités Mathématiques et NSI. Mention Bien.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="resume-column" data-aos="fade-left">
+                        <h2 class="section-title">Mon Parcours Pro</h2>
+
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <span class="timeline-date">16/12/2024 - 15/08/2025</span>
+                                <div class="timeline-content">
+                                    <h3>Manutentionnaire</h3>
+                                    <h4>SEVIA - Avignon</h4>
+                                    <p>Manutentionnaire dans un site de triage.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <span class="timeline-date">Été 2024</span>
+                                <div class="timeline-content">
+                                    <h3>Équipier polyvalent</h3>
+                                    <h4>McDonald's</h4>
+                                    <p>Travail d'équipe, gestion du stress et rapidité.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="github-btn-container" data-aos="zoom-in" style="margin-top: 3rem; text-align: center;">
+                    <a href="https://github.com/Zyonnn13" target="_blank" class="btn-github-pro">
+                        <i class="fa-brands fa-github"></i>
+                        <span>Voir mon profil GitHub</span>
+                    </a>
+                </div>
+        </section>
+
+        <section id="skills">
+            <div class="reveal">
+                <h2 class="section-title" data-aos="fade-up">Compétences</h2>
+
+                <div class="skills-grid">
+
+                    <div class="skill-item" data-aos="zoom-in" data-aos-delay="0">
+                        <div class="skill-icon"><i class="fa-brands fa-html5 html-color"></i></div>
+                        <p class="skill-name">HTML5</p>
+                    </div>
+
+                    <div class="skill-item" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="skill-icon"><i class="fa-brands fa-css3-alt css-color"></i></div>
+                        <p class="skill-name">CSS3</p>
+                    </div>
+
+                    <div class="skill-item" data-aos="zoom-in" data-aos-delay="200">
+                        <div class="skill-icon"><i class="fa-brands fa-js js-color"></i></div>
+                        <p class="skill-name">JavaScript</p>
+                    </div>
+
+                    <div class="skill-item" data-aos="zoom-in" data-aos-delay="300">
+                        <div class="skill-icon">
+                            <img src="https://cdn.simpleicons.org/unrealengine/000000" alt="Logo UE5" width="50"
+                                height="50">
+                        </div>
+                        <p class="skill-name">UE5</p>
+                    </div>
+
+                    <div class="skill-item" data-aos="zoom-in" data-aos-delay="400">
+                        <div class="skill-icon">
+                            <img src="https://cdn.simpleicons.org/go/00ADD8" alt="Logo GoLang" width="50" height="50">
+                        </div>
+                        <p class="skill-name">GoLang</p>
+                    </div>
+
+                </div>
+                <div class="soft-skills-container">
+                    <h3 class="soft-skills-title" data-aos="fade-up">Savoir-Être</h3>
+
+                    <div class="soft-tags-grid">
+                        <span class="soft-tag" data-aos="zoom-in" data-aos-delay="100">Travail d'équipe</span>
+                        <span class="soft-tag" data-aos="zoom-in" data-aos-delay="200">Autonomie</span>
+                        <span class="soft-tag" data-aos="zoom-in" data-aos-delay="300">Curiosité</span>
+                        <span class="soft-tag" data-aos="zoom-in" data-aos-delay="400">Résolution de problèmes</span>
+                        <span class="soft-tag" data-aos="zoom-in" data-aos-delay="500">Gestion du temps</span>
+                        <span class="soft-tag" data-aos="zoom-in" data-aos-delay="600">Créativité</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <div class="reveal" style="text-align: center;">
+                <h2 class="section-title" style="color: #FFF;">Mes Projets</h2>
+                <p style="color: #aaa; margin-bottom: 3rem;">
+                    Découvrez mes réalisations en détail. Glissez pour naviguer.
+                </p>
+            </div>
+
+            <div class="swiper mySwiper reveal">
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide">
+                        <div class="carousel-card">
+                            <div class="card-image">
+                                <img src="/static/asset/puissance4.png" alt="Jeu Puissance 4" loading="lazy">
+                                <div class="card-overlay">
+                                    <a href="https://github.com/Zyonnn13/power-4-web" target="_blank" class="btn-code">
+                                        <i class="fa-brands fa-github"></i> Voir le Code
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h3>Puissance 4 Web</h3>
+                                <p class="card-desc">
+                                    Reproduction du célèbre jeu de société. L'objectif était de créer une intelligence
+                                    artificielle simple capable de jouer contre un humain directement dans le
+                                    navigateur.
+                                </p>
+                                <div class="project-tags">
+                                    <span>JavaScript</span><span>Algorithme</span><span>Jeu</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="carousel-card">
+                            <div class="card-image">
+                                <img src="/static/asset/site_web.png" alt="Site Dynamique" loading="lazy">
+                                <div class="card-overlay">
+                                    <a href="https://github.com/Zyonnn13/Site_Web_Dynamique" target="_blank"
+                                        class="btn-code">
+                                        <i class="fa-brands fa-github"></i> Voir le Code
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h3>E-Commerce Dynamique</h3>
+                                <p class="card-desc">
+                                    Un site web complet avec gestion de base de données. Il permet aux utilisateurs de
+                                    s'inscrire, de se connecter et de gérer un panier d'achat, comme sur un vrai site
+                                    marchand.
+                                </p>
+                                <div class="project-tags">
+                                    <span>Back-end</span><span>Base de données</span><span>PHP/SQL</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="carousel-card">
+                            <div class="card-image">
+                                <img src="/static/asset/red.png" alt="Projet Red" loading="lazy">
+                                <div class="card-overlay">
+                                    <a href="https://github.com/Zyonnn13/Project-RED-groupe-1" target="_blank"
+                                        class="btn-code">
+                                        <i class="fa-brands fa-github"></i> Voir le Code
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h3>Projet RED (Groupe)</h3>
+                                <p class="card-desc">
+                                    Projet collaboratif simulant une entreprise. Nous avons appris à travailler en
+                                    équipe, à répartir les tâches et à utiliser des outils de gestion de projet comme
+                                    Git.
+                                </p>
+                                <div class="project-tags">
+                                    <span>Travail d'équipe</span><span>Gestion de projet</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="carousel-card">
+                            <div class="card-image">
+                                <img src="/static/asset/landing.png" alt="Landing Page" loading="lazy">
+                                <div class="card-overlay">
+                                    <a href="https://github.com/Zyonnn13/TP-Landing_page" target="_blank"
+                                        class="btn-code">
+                                        <i class="fa-brands fa-github"></i> Voir le Code
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h3>Landing Page Design</h3>
+                                <p class="card-desc">
+                                    Création d'une page de présentation moderne et "Responsive". Le site s'adapte
+                                    parfaitement à toutes les tailles d'écrans (téléphone, tablette, ordinateur).
+                                </p>
+                                <div class="project-tags">
+                                    <span>HTML/CSS</span><span>Design UI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="carousel-card">
+                            <div class="card-image">
+                                <img src="../asset/puissance4.png" alt="Jeu Puissance 4" loading="lazy">
+                                <div class="card-overlay">
+                                    <a href="https://github.com/Zyonnn13/power-4-web" target="_blank" class="btn-code">
+                                        <i class="fa-brands fa-github"></i> Voir le Code
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h3>Puissance 4 Web</h3>
+                                <p class="card-desc">
+                                    Reproduction du célèbre jeu de société. L'objectif était de créer une intelligence
+                                    artificielle simple capable de jouer contre un humain directement dans le
+                                    navigateur.
+                                </p>
+                                <div class="project-tags">
+                                    <span>JavaScript</span><span>Algorithme</span><span>Jeu</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="carousel-card">
+                            <div class="card-image">
+                                <img src="../asset/site_web.png" alt="Site Dynamique" loading="lazy">
+                                <div class="card-overlay">
+                                    <a href="https://github.com/Zyonnn13/Site_Web_Dynamique" target="_blank"
+                                        class="btn-code">
+                                        <i class="fa-brands fa-github"></i> Voir le Code
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h3>E-Commerce Dynamique</h3>
+                                <p class="card-desc">
+                                    Un site web complet avec gestion de base de données. Il permet aux utilisateurs de
+                                    s'inscrire, de se connecter et de gérer un panier d'achat, comme sur un vrai site
+                                    marchand.
+                                </p>
+                                <div class="project-tags">
+                                    <span>Back-end</span><span>Base de données</span><span>PHP/SQL</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="carousel-card">
+                            <div class="card-image">
+                                <img src="../asset/red.png" alt="Projet Red" loading="lazy">
+                                <div class="card-overlay">
+                                    <a href="https://github.com/Zyonnn13/Project-RED-groupe-1" target="_blank"
+                                        class="btn-code">
+                                        <i class="fa-brands fa-github"></i> Voir le Code
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h3>Projet RED (Groupe)</h3>
+                                <p class="card-desc">
+                                    Projet collaboratif simulant une entreprise. Nous avons appris à travailler en
+                                    équipe, à répartir les tâches et à utiliser des outils de gestion de projet comme
+                                    Git.
+                                </p>
+                                <div class="project-tags">
+                                    <span>Travail d'équipe</span><span>Gestion de projet</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="carousel-card">
+                            <div class="card-image">
+                                <img src="../asset/landing.png" alt="Landing Page" loading="lazy">
+                                <div class="card-overlay">
+                                    <a href="https://github.com/Zyonnn13/TP-Landing_page" target="_blank"
+                                        class="btn-code">
+                                        <i class="fa-brands fa-github"></i> Voir le Code
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <h3>Landing Page Design</h3>
+                                <p class="card-desc">
+                                    Création d'une page de présentation moderne et "Responsive". Le site s'adapte
+                                    parfaitement à toutes les tailles d'écrans (téléphone, tablette, ordinateur).
+                                </p>
+                                <div class="project-tags">
+                                    <span>HTML/CSS</span><span>Design UI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="reveal">
+                <h2 class="section-title">Contactez-moi</h2>
+                <div class="contact-container">
+                    <div class="contact-info" data-aos="fade-right">
+                        <p class="contact-intro">Pour discuter d'un projet ou simplement dire bonjour.</p>
+
+                        <div class="info-item">
+                            <div class="icon-circle">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <span>clement.belmondo13@ynov.com</span>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="icon-circle">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <span>Aix-en-Provence</span>
+                        </div>
+
+                        <div class="info-item">
+                            <div class="icon-circle">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <span>+33 6 59 05 93 20</span>
+                        </div>
+                    </div>
+
+                    <form id="contactForm" novalidate>
+                        <div class="form-group">
+                            <input type="text" id="name" placeholder="Votre Nom" required>
+                            <span class="error-msg">Ce champ est requis</span>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" placeholder="Votre Email" required>
+                            <span class="error-msg">Email invalide</span>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" rows="5" placeholder="Votre Message" required></textarea>
+                            <span class="error-msg">N'oubliez pas votre message</span>
+                        </div>
+                        <button type="submit" id="submitBtn">Envoyer le message</button>
+                        <div id="form-feedback"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <div class="footer-text">
+                    <h2>C.B</h2>
+                    <p style="max-width: 500px; color: #aaa; font-size: 0.9rem; margin-top: 1rem;">
+                        © 2024 Clément Belmondo.
+                    </p>
+                </div>
+                <div class="visit-counter">
+                    <i class="fa-solid fa-eye"></i> Visites : <span id="visitCount">0</span>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+
+    <script src="/static/js/main.js"></script>
+
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>
